@@ -52,7 +52,7 @@ def arp_monitor_callback(pkt):
     threading.Thread(target=t, args=(pkt,)).start()
 
 def ipForward():
-    ip_forward_path = "/proc/sys/net/ip_forward"
+    ip_forward_path = "/proc/sys/net/ipv4/ip_forward"
     with open(ip_forward_path) as x:
         if x.read != 1:
             with open(ip_forward_path, "w") as y:
