@@ -54,7 +54,7 @@ def arp_monitor_callback(pkt):
 def ipForward():
     ip_forward_path = "/proc/sys/net/ipv4/ip_forward"
     with open(ip_forward_path) as x:
-        if x.read != 1:
+        if x.read() != 1:
             with open(ip_forward_path, "w") as y:
                 y.write("1")
 
