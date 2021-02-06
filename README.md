@@ -1,2 +1,4 @@
 # arp-spoof
-Tool for spoofing ARP replies on a local access network. Currently a work-in-progress, may not work properly.
+Tool for spoofing ARP replies on a local access network.
+
+usage: aspoof.py [-h] -t TARGET -r ROUTER [-m MAC]
