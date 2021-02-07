@@ -3,7 +3,6 @@ from time import sleep
 import threading
 from argparse import ArgumentParser
 
-
 class Spoof:
 
     def __init__(self,targetip,routerip,mac=None,ip_forward=False):
@@ -52,6 +51,7 @@ class Spoof:
         print("Router IP:", self.routerip)
         print("Router MAC:", self.routermac)
 
+        
     def t(self,pkt):
 
         if scapy.ARP in pkt and pkt[scapy.ARP].op == 1:
@@ -100,10 +100,11 @@ class Spoof:
         f = "host {} and host {} and arp".format(self.targetip,self.routerip)
         scapy.sniff(prn=self.arpTrigger, filter=f, store=0)
 
-        print("\nResting ARP cache and exiting...")
+        print("\nResetting ARP cache and exiting...")
         self.spoof(self.targetip,self.targetmac,self.routerip,self.routermac)
         self.spoof(self.routerip,self.routermac,self.targetip,self.targetmac)
 
+        
 def main():
     parser = ArgumentParser(description="Spoof ARP replies on your LAN")
     parser.add_argument("-t", "--target", help="IP Address of target", required=True)
