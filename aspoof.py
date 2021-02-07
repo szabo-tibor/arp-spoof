@@ -107,7 +107,7 @@ class Spoof:
 def main():
     parser = ArgumentParser(description="Spoof ARP replies on your LAN")
     parser.add_argument("-t", "--target", help="IP Address of target", required=True)
-    parser.add_argument("-r", "--router", help="IP Address of router", required=True)
+    parser.add_argument("-r", "--router", help="IP Address of router (optional)", default=scapy.conf.route.route("0.0.0.0")[2])
     parser.add_argument("-m", "--mac", help="Manually set your mac address (optional)", default=None)
     cli_input = parser.parse_args()
     spoofer = Spoof(cli_input.target,cli_input.router,cli_input.mac)
