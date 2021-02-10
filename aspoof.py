@@ -67,15 +67,15 @@ class Spoof:
 
             if pkt.psrc in self.targets and pkt.pdst == self.routerip:
                 print(pkt.psrc, "is asking for", pkt.pdst, ", sending spoofed replies...")
-                for x in range(5):
+                for x in range(3):
                     self.spoof(pkt.psrc,self.targets[pkt.psrc],self.routerip,self.mymac)
-                    sleep(0.5)
+                    sleep(1.2)
 
             if pkt.psrc == self.routerip and pkt.pdst in self.targets:
                 print(self.routerip, "is asking for", pkt.pdst, ", sending spoofed replies...")
-                for x in range(5):
+                for x in range(3):
                     self.spoof(self.routerip,self.routermac,pkt.pdst,self.mymac)
-                    sleep(0.5)
+                    sleep(1.2)
 
     def arpTrigger(self,pkt):
 
@@ -140,6 +140,7 @@ def main():
                         "--mac",
                         help="Manually set your mac address (optional)",
                         default=None)
+    
     parser.add_argument("-fw",
                         "--forward",
                         help="Enable IP Forwarding (currently only supported on Linux based operating systems",
